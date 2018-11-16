@@ -1,8 +1,16 @@
 package Utils;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.lang.*;
+import java.io.*;
+import java.util.*;
+
 public class Utils {
 
-    static public State createSonState(State state, Direction direction){
+     public static State createSonState(State state, Direction direction){
         int[][] m =state.getMatrix();
         EmptyCell emptyCell=null;
         Position pos= state.getEmptyCell().getPosition();
@@ -32,7 +40,66 @@ public class Utils {
             emptyCell=new EmptyCell(new Position(pos.x,pos.y-1),matrixSize);
             directionToState=Direction.right;
         }
-        State sonState=new State(m,emptyCell,directionToState,state);
+        State sonState=new State(m,emptyCell,directionToState,state,state.getLevel()+1);
         return sonState;
     }
+
+    public static   int [][] createInitialMatrix(String st,int size){
+        String [] numbers=st.split("-");
+        int [][] matrix= new int [size][size];
+
+        int num=0;
+        for (int r=0;r<size;r++)
+            for(int c=0; c<size; c++){
+                matrix[r][c]=Integer.getInteger(numbers[num]);
+                num++;
+            }
+        return matrix;
+    }
+
+    public static EmptyCell getEmptyCell(int[][] matrix, int size){
+        EmptyCell emptyCell=null;
+        for (int r=0;r<size;r++)
+            for(int c=0; c<size; c++)
+                if(matrix[r][c]==0) {
+                    Position pos = new Position(r, c);
+                    emptyCell = new EmptyCell(pos, size);
+                }
+        return emptyCell;
+
+    }
+
+    public static String getDirectionsToSolution(State state){
+        String path ="";
+        while(state!=null){
+            path+= getFirstLeter(state.getDirectionToState());
+            state=state.getFather();
+        }
+        return reverseString(path);
+    }
+
+    private static String getFirstLeter(Direction direction){
+        switch (direction){
+            case up:
+                return "U";
+            case down:
+                return "D";
+            case left:
+                return "L";
+            case right:
+                return "R";
+        }
+        return null;
+    }
+
+    private static String reverseString(String string){
+        byte [] stringRevered=new byte[string.length()];
+        byte [] stringArray= string.getBytes();
+        for (int i=0; i<string.length();i++)
+            stringRevered[i]=stringArray[string.length()-i-1];
+
+        return new String(stringRevered);
+    }
+
+
 }

@@ -14,6 +14,7 @@ public class BFS implements Searcher {
     private State initState;
     private Queue<State> queue;
     private Rules rules;
+    private int opened=0;
 
     public BFS(State initState, Rules rules) {
         this.initState = initState;
@@ -27,12 +28,16 @@ public class BFS implements Searcher {
     public State findSolution() {
         while(queue.peek()!=null){
             State next= queue.poll();
+            opened++;
+            next.setOpenedState(opened);
             if (rules.checkIfGoal(next))
                 return next;
             else{
+
                     for(Direction direction: Direction.values()){
                         if(rules.checkSon(next,direction))
                             queue.add(Utils.createSonState(next,direction));
+                        opened++;
                 }
             }
         }

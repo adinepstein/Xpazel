@@ -6,12 +6,16 @@ public class State {
     private EmptyCell emptyCell;
     private Direction directionToState;
     private State father;
+    private int level;
+    private  int openedState;
 
-    public State(int[][] matrix, EmptyCell emptyCell, Direction directionToState, State father) {
+    public State(int[][] matrix, EmptyCell emptyCell, Direction directionToState, State father,int level) {
         this.matrix = matrix;
         this.emptyCell = emptyCell;
         this.directionToState = directionToState;
         this.father = father;
+        this.level=level;
+
     }
 
     public int[][] getMatrix() {
@@ -44,5 +48,21 @@ public class State {
 
     public void setFather(State father) {
         this.father = father;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getOpenedState() {
+        return openedState;
+    }
+
+    public void setOpenedState(int openedState) {
+        this.openedState = openedState;
     }
 }
