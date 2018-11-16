@@ -17,21 +17,25 @@ public class Main {
         //algo number
         String st;
         st=bf.readLine();
-        int algo= Integer.getInteger(st);
+        int algo= Integer.parseInt(st);
         //pazel size
         st=bf.readLine();
-        int matrixSize=Integer.getInteger(st);
+        int matrixSize=Integer.parseInt(st);
         //order of numbers on board
         st=bf.readLine();
         int [][] matrix= Utils.createInitialMatrix(st,matrixSize);
+        bf.close();
         // create searcher
         EmptyCell emptyCell= Utils.getEmptyCell(matrix,matrixSize);
-        State state= new State(matrix,emptyCell,null,null,0,1);
+        State state= new State(matrix,emptyCell,null,null,0);
         Searcher searcher= SearcherFactory.getSearcher(algo,state,new XPazelRules());
 
         State goalState = searcher.findSolution();
-        String DirectionsToGoal=Utils.getDirectionsToSolution(goalState);
+        String directionsToGoal=Utils.getDirectionsToSolution(goalState);
 
+        BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
+        writer.write(directionsToGoal + " " + goalState.getOpenedState() + " "+ goalState.getLevel() +"\n");
+        writer.close();
 
     }
 

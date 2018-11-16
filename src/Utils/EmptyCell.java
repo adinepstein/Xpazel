@@ -14,7 +14,7 @@ public class EmptyCell {
     }
 
     private void setNeighborsForLegalMovement(){
-        for (int i=0;i<3;i++)
+        for (int i=0;i<4;i++)
             neighbors[i]=true;
         if (position.x==0)
             neighbors[1] = false;

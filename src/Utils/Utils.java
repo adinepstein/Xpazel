@@ -11,7 +11,7 @@ import java.util.*;
 public class Utils {
 
      public static State createSonState(State state, Direction direction){
-        int[][] m =state.getMatrix();
+        int[][] m = copyMatrix(state.getMatrix());
         EmptyCell emptyCell=null;
         Position pos= state.getEmptyCell().getPosition();
         int matrixSize= state.getEmptyCell().getMetrixSize();
@@ -34,7 +34,7 @@ public class Utils {
             emptyCell=new EmptyCell(new Position(pos.x,pos.y+1),matrixSize);
             directionToState=Direction.left;
         }
-        else if(direction==Direction.down){
+        else if(direction==Direction.right){
             m[pos.x][pos.y]=m[pos.x][pos.y-1];
             m[pos.x][pos.y-1]=0;
             emptyCell=new EmptyCell(new Position(pos.x,pos.y-1),matrixSize);
@@ -51,7 +51,7 @@ public class Utils {
         int num=0;
         for (int r=0;r<size;r++)
             for(int c=0; c<size; c++){
-                matrix[r][c]=Integer.getInteger(numbers[num]);
+                matrix[r][c]=Integer.parseInt(numbers[num]);
                 num++;
             }
         return matrix;
@@ -71,11 +71,22 @@ public class Utils {
 
     public static String getDirectionsToSolution(State state){
         String path ="";
-        while(state!=null){
+        while(state!=null && state.getDirectionToState()!=null){
             path+= getFirstLeter(state.getDirectionToState());
             state=state.getFather();
         }
         return reverseString(path);
+    }
+
+    public static void printMatrix(int [][] matrix){
+        String m="";
+        for(int r=0;r<matrix.length;r++){
+            for(int c=0;c<matrix.length;c++)
+                m+=matrix[r][c] + " ";
+            m+="\n";
+        }
+        System.out.println(m);
+
     }
 
     private static String getFirstLeter(Direction direction){
@@ -99,6 +110,15 @@ public class Utils {
             stringRevered[i]=stringArray[string.length()-i-1];
 
         return new String(stringRevered);
+    }
+
+    private static int [][] copyMatrix(int[][] matrix){
+        int [][] newMatrix= new int [matrix.length][matrix.length];
+        for(int r=0; r<matrix.length; r++)
+            for (int c=0; c<matrix.length;c++)
+                newMatrix[r][c]=matrix[r][c];
+
+        return newMatrix;
     }
 
 

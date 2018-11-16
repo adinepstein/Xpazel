@@ -19,26 +19,33 @@ public class BFS implements Searcher {
     public BFS(State initState, Rules rules) {
         this.initState = initState;
         this.rules = rules;
-        this.queue = new ArrayBlockingQueue<State>(Integer.MAX_VALUE);
+        this.queue = new ArrayBlockingQueue<State>(50000);
         queue.add(this.initState);
     }
 
 
     @Override
     public State findSolution() {
+        if(rules.checkIfGoal(initState))
+            return initState;
         while(queue.peek()!=null){
             State next= queue.poll();
             opened++;
+            System.out.println(next.getDirectionToState());
             next.setOpenedState(opened);
-            if (rules.checkIfGoal(next))
-                return next;
-            else{
+            for(Direction direction: Direction.values()){
+                if(rules.checkSon(next,direction)) {
+                    State sonState=Utils.createSonState(next, direction);
+                    sonState.setLevel(0);
+                    sonState.setOpenedState(opened);
+                    Utils.printMatrix(sonState.getMatrix());
+                    if (rules.checkIfGoal(sonState))
+                        return sonState;
+                    queue.add(sonState);
 
-                    for(Direction direction: Direction.values()){
-                        if(rules.checkSon(next,direction))
-                            queue.add(Utils.createSonState(next,direction));
-                        opened++;
-                }
+                        }
+
+
             }
         }
         return null;
