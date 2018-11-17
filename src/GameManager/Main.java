@@ -37,7 +37,7 @@ public class Main {
         String directionsToGoal=Utils.getDirectionsToSolution(goalState);
         //write solution to file
         BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
-        writer.write(directionsToGoal + " " + goalState.getOpenedState() + " "+ goalState.getLevel() +"\n");
+        writer.write(directionsToGoal + " " + goalState.getOpened() + " "+ goalState.getPrintedResult() +"\n");
         writer.close();
 
     }

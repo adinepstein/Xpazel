@@ -3,7 +3,6 @@ package Searchers;
 import GameRules.Rules;
 import Utils.*;
 
-import java.util.List;
 import java.util.Stack;
 
 public class DFS_L implements Searcher {
@@ -27,11 +26,11 @@ public class DFS_L implements Searcher {
     public State findSolution() {
         int opened = 0;
         while (!openList.isEmpty()) {
-            if (openList.peek().getLevel() < limit) {
+            if (openList.peek().getPrintedResult() < limit) {
                 State state = openList.pop();
-                Utils.printMatrix(state.getMatrix());
+                //Utils.printMatrix(state.getMatrix());
                 opened++;
-                state.setOpenedState(opened);
+                state.setOpened(opened);
                 if (rules.checkIfGoal(state))
                     return state;
                  else {
@@ -48,7 +47,7 @@ public class DFS_L implements Searcher {
             } else {
                 State state = openList.pop();
                 opened++;
-                state.setOpenedState(opened);
+                state.setOpened(opened);
                 if (rules.checkIfGoal(state))
                     return state;
             }

@@ -6,15 +6,16 @@ public class State {
     private EmptyCell emptyCell;
     private Direction directionToState;
     private State father;
-    private int level;
-    private  int openedState;
+    //IDA-depth, A*-cost, BFS- 0
+    private int printedResult;
+    private  int opened;
 
-    public State(int[][] matrix, EmptyCell emptyCell, Direction directionToState, State father,int level) {
+    public State(int[][] matrix, EmptyCell emptyCell, Direction directionToState, State father,int printedResult) {
         this.matrix = matrix;
         this.emptyCell = emptyCell;
         this.directionToState = directionToState;
         this.father = father;
-        this.level=level;
+        this.printedResult = printedResult;
 
     }
 
@@ -50,19 +51,19 @@ public class State {
         this.father = father;
     }
 
-    public int getLevel() {
-        return level;
+    public int getPrintedResult() {
+        return printedResult;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setPrintedResult(int printedResult) {
+        this.printedResult = printedResult;
     }
 
-    public int getOpenedState() {
-        return openedState;
+    public int getOpened() {
+        return opened;
     }
 
-    public void setOpenedState(int openedState) {
-        this.openedState = openedState;
+    public void setOpened(int opened) {
+        this.opened = opened;
     }
 }

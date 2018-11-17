@@ -1,12 +1,6 @@
 package Utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.lang.*;
-import java.io.*;
-import java.util.*;
 
 public class Utils {
 
@@ -40,7 +34,7 @@ public class Utils {
             emptyCell=new EmptyCell(new Position(pos.x,pos.y-1),matrixSize);
             directionToState=Direction.right;
         }
-        State sonState=new State(m,emptyCell,directionToState,state,state.getLevel()+1);
+        State sonState=new State(m,emptyCell,directionToState,state,state.getPrintedResult()+1);
         return sonState;
     }
 

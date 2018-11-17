@@ -7,8 +7,6 @@ import Utils.Direction;
 import Utils.State;
 import Utils.Utils;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -23,7 +21,7 @@ public class AStar implements Searcher {
         this.rules = rules;
         this.initState = initState;
         this.heuristicFunction = heuristicFunction;
-        queue= new PriorityQueue<State>(50000, new StateComperatorEmptyCellEuclid(heuristicFunction));
+        queue= new PriorityQueue<State>(5000000, new StateComperatorEmptyCellEuclid(heuristicFunction));
         queue.add(initState);
 
     }
@@ -34,14 +32,16 @@ public class AStar implements Searcher {
         while (!queue.isEmpty()){
             State state=queue.poll();
             opened++;
-            state.setOpenedState(opened);
-            Utils.printMatrix(state.getMatrix());
+            state.setPrintedResult(state.getPrintedResult()+ (int)heuristicFunction.calculate(state));
+            state.setOpened(opened);
+            //Utils.printMatrix(state.getMatrix());
             if(rules.checkIfGoal(state))
                 return state;
             else{
                 for(Direction direction:Direction.values()){
                     if(rules.checkSon(state,direction)){
                         State s=Utils.createSonState(state,direction);
+                        //System.out.println("" + direction + " " + heuristicFunction.calculate(s));
                         queue.add(s);
                     }
                 }
