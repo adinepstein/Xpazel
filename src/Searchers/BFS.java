@@ -38,7 +38,7 @@ public class BFS implements Searcher {
                     State sonState=Utils.createSonState(next, direction);
                     sonState.setLevel(0);
                     sonState.setOpenedState(opened);
-                    Utils.printMatrix(sonState.getMatrix());
+                    //Utils.printMatrix(sonState.getMatrix());
                     if (rules.checkIfGoal(sonState))
                         return sonState;
                     queue.add(sonState);

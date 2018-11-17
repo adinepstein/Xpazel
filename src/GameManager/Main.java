@@ -1,6 +1,8 @@
-package GameRules.GameManager;
+package GameManager;
 
 import GameRules.XPazelRules;
+import HeurisiticFunctions.EmptyCellEuclidDistance;
+import HeurisiticFunctions.HeuristicFunction;
 import Searchers.Searcher;
 import Searchers.SearcherFactory;
 import Utils.EmptyCell;
@@ -28,11 +30,12 @@ public class Main {
         // create searcher
         EmptyCell emptyCell= Utils.getEmptyCell(matrix,matrixSize);
         State state= new State(matrix,emptyCell,null,null,0);
-        Searcher searcher= SearcherFactory.getSearcher(algo,state,new XPazelRules());
-
+        HeuristicFunction heuristicFunction= new EmptyCellEuclidDistance();
+        Searcher searcher= SearcherFactory.getSearcher(algo,state,new XPazelRules(),heuristicFunction);
+        //find goal state and solution direcions
         State goalState = searcher.findSolution();
         String directionsToGoal=Utils.getDirectionsToSolution(goalState);
-
+        //write solution to file
         BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
         writer.write(directionsToGoal + " " + goalState.getOpenedState() + " "+ goalState.getLevel() +"\n");
         writer.close();
