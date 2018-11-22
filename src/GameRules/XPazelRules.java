@@ -3,7 +3,9 @@ package GameRules;
 import Utils.Direction;
 import Utils.State;
 
+//rules of Xpazel
 public class XPazelRules implements Rules {
+    //checks if the empty cell is on a edge
     @Override
     public boolean checkSon(State currentState, Direction direction) {
         switch(direction){

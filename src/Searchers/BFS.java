@@ -7,7 +7,7 @@ import Utils.Utils;
 
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
-
+//PFS algorithm implementation
 public class BFS implements Searcher {
 
     private State initState;
@@ -30,14 +30,15 @@ public class BFS implements Searcher {
             opened++;
            // System.out.println(next.getDirectionToState());
             next.setOpened(opened);
+            if (rules.checkIfGoal(next))
+                return next;
             for(Direction direction: Direction.values()){
                 if(rules.checkSon(next,direction)) {
                     State sonState=Utils.createSonState(next, direction);
                     sonState.setPrintedResult(0);
                     sonState.setOpened(opened);
                     //Utils.printMatrix(sonState.getMatrix());
-                    if (rules.checkIfGoal(sonState))
-                        return sonState;
+
                     queue.add(sonState);
 
                         }

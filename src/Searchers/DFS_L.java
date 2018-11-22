@@ -4,7 +4,7 @@ import GameRules.Rules;
 import Utils.*;
 
 import java.util.Stack;
-
+// DFS limit implementation
 public class DFS_L implements Searcher {
 
     private Rules rules;

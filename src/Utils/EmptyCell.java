@@ -12,7 +12,7 @@ public class EmptyCell {
         this.metrixSize= metrixSize;
         setNeighborsForLegalMovement();
     }
-
+// function checks all the possible directions for the state according to the position of the empty cell and edges
     private void setNeighborsForLegalMovement(){
         for (int i=0;i<4;i++)
             neighbors[i]=true;

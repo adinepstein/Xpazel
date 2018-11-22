@@ -4,7 +4,7 @@ import GameRules.Rules;
 import Utils.State;
 
 import java.util.List;
-
+// IDA implementation using DFS limit for each iteration
 public class IDA implements Searcher {
 
     private State initState;

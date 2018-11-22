@@ -5,7 +5,7 @@ import HeurisiticFunctions.HeuristicFunction;
 import Utils.State;
 
 public class SearcherFactory {
-
+// creates searcher object according to input from configuration file
     public static Searcher getSearcher(int num, State state, Rules rules, HeuristicFunction heuristicFunction){
         Searcher searcher=null;
         switch (num){

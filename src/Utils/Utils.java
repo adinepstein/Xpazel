@@ -3,7 +3,7 @@ package Utils;
 import java.lang.*;
 
 public class Utils {
-
+    // common function for creating new state in game
      public static State createSonState(State state, Direction direction){
         int[][] m = copyMatrix(state.getMatrix());
         EmptyCell emptyCell=null;
@@ -38,6 +38,7 @@ public class Utils {
         return sonState;
     }
 
+    //from string creates the initial matrix of the game accoring to input in configure file
     public static   int [][] createInitialMatrix(String st,int size){
         String [] numbers=st.split("-");
         int [][] matrix= new int [size][size];
@@ -50,7 +51,7 @@ public class Utils {
             }
         return matrix;
     }
-
+    //return empty cell of the matrix
     public static EmptyCell getEmptyCell(int[][] matrix, int size){
         EmptyCell emptyCell=null;
         for (int r=0;r<size;r++)
@@ -62,7 +63,7 @@ public class Utils {
         return emptyCell;
 
     }
-
+//creates the direction instructions to solution
     public static String getDirectionsToSolution(State state){
         String path ="";
         while(state!=null && state.getDirectionToState()!=null){
@@ -71,7 +72,7 @@ public class Utils {
         }
         return reverseString(path);
     }
-
+// prints matrix of state- helps for debuging
     public static void printMatrix(int [][] matrix){
         String m="";
         for(int r=0;r<matrix.length;r++){
@@ -105,7 +106,7 @@ public class Utils {
 
         return new String(stringRevered);
     }
-
+// deep copy of matrix
     private static int [][] copyMatrix(int[][] matrix){
         int [][] newMatrix= new int [matrix.length][matrix.length];
         for(int r=0; r<matrix.length; r++)

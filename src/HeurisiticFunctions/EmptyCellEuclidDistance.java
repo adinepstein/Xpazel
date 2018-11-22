@@ -3,6 +3,7 @@ package HeurisiticFunctions;
 import Utils.Position;
 import Utils.State;
 public class EmptyCellEuclidDistance implements HeuristicFunction {
+    //heurisitic function is the distance of the empty cell to  it's location in goal state
     @Override
     public double calculate(State curState) {
         Position p1=curState.getEmptyCell().getPosition();

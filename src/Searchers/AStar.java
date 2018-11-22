@@ -9,7 +9,7 @@ import Utils.Utils;
 
 import java.util.PriorityQueue;
 import java.util.Queue;
-
+// A star algorithm implementation
 public class AStar implements Searcher {
 
     private Rules rules;
@@ -32,6 +32,7 @@ public class AStar implements Searcher {
         while (!queue.isEmpty()){
             State state=queue.poll();
             opened++;
+            // g(x) + h(x)
             state.setPrintedResult(state.getPrintedResult()+ (int)heuristicFunction.calculate(state));
             state.setOpened(opened);
             //Utils.printMatrix(state.getMatrix());

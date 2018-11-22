@@ -3,7 +3,7 @@ package HeurisiticFunctions;
 import Utils.State;
 
 import java.util.Comparator;
-
+//comperator for priority queue for the heuristic implementation of the empty cell distance to goal location
 public class StateComperatorEmptyCellEuclid implements Comparator<State> {
 
     private HeuristicFunction heuristicFunction;

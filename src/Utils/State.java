@@ -1,9 +1,10 @@
 package Utils;
-
+// State objects holds all information of every state in the game
 public class State {
 
     private int [][] matrix;
     private EmptyCell emptyCell;
+    // direction from current state to current state
     private Direction directionToState;
     private State father;
     //IDA-depth, A*-cost, BFS- 0
